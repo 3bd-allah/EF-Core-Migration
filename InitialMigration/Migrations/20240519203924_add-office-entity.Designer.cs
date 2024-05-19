@@ -4,6 +4,7 @@ using InitialMigration.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialMigration.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240519203924_add-office-entity")]
+    partial class addofficeentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,9 +94,6 @@ namespace InitialMigration.Migrations
                     b.Property<int?>("OfficeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SectionId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OfficeId")
@@ -108,40 +108,35 @@ namespace InitialMigration.Migrations
                             Id = 1,
                             FName = "Ahmed",
                             LName = "Abdullah",
-                            OfficeId = 1,
-                            SectionId = 0
+                            OfficeId = 1
                         },
                         new
                         {
                             Id = 2,
                             FName = "Yasmeen",
                             LName = "Mohammed",
-                            OfficeId = 2,
-                            SectionId = 0
+                            OfficeId = 2
                         },
                         new
                         {
                             Id = 3,
                             FName = "Khalid",
                             LName = "Hassan",
-                            OfficeId = 3,
-                            SectionId = 0
+                            OfficeId = 3
                         },
                         new
                         {
                             Id = 4,
                             FName = "Nadia",
                             LName = "Ali",
-                            OfficeId = 4,
-                            SectionId = 0
+                            OfficeId = 4
                         },
                         new
                         {
                             Id = 5,
                             FName = "Omar",
                             LName = "Ibrahim",
-                            OfficeId = 5,
-                            SectionId = 0
+                            OfficeId = 5
                         });
                 });
 
@@ -197,110 +192,6 @@ namespace InitialMigration.Migrations
                         });
                 });
 
-            modelBuilder.Entity("InitialMigration.Entities.Section", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("InstructorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SectionName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("VARCHAR");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("InstructorId");
-
-                    b.ToTable("Sections", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CourseId = 1,
-                            InstructorId = 1,
-                            SectionName = "S_MA1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CourseId = 1,
-                            InstructorId = 2,
-                            SectionName = "S_MA2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CourseId = 2,
-                            InstructorId = 1,
-                            SectionName = "S_PH1"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CourseId = 2,
-                            InstructorId = 3,
-                            SectionName = "S_PH2"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CourseId = 3,
-                            InstructorId = 2,
-                            SectionName = "S_CH1"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CourseId = 3,
-                            InstructorId = 3,
-                            SectionName = "S_CH2"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CourseId = 4,
-                            InstructorId = 4,
-                            SectionName = "S_BI1"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CourseId = 4,
-                            InstructorId = 5,
-                            SectionName = "S_BI2"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CourseId = 5,
-                            InstructorId = 4,
-                            SectionName = "S_CS1"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CourseId = 5,
-                            InstructorId = 5,
-                            SectionName = "S_CS2"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CourseId = 5,
-                            InstructorId = 4,
-                            SectionName = "S_CS3"
-                        });
-                });
-
             modelBuilder.Entity("InitialMigration.Entities.Instructor", b =>
                 {
                     b.HasOne("InitialMigration.Entities.Office", "Office")
@@ -308,33 +199,6 @@ namespace InitialMigration.Migrations
                         .HasForeignKey("InitialMigration.Entities.Instructor", "OfficeId");
 
                     b.Navigation("Office");
-                });
-
-            modelBuilder.Entity("InitialMigration.Entities.Section", b =>
-                {
-                    b.HasOne("InitialMigration.Entities.Course", "Course")
-                        .WithMany("Sections")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InitialMigration.Entities.Instructor", "Instructor")
-                        .WithMany("Sections")
-                        .HasForeignKey("InstructorId");
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Instructor");
-                });
-
-            modelBuilder.Entity("InitialMigration.Entities.Course", b =>
-                {
-                    b.Navigation("Sections");
-                });
-
-            modelBuilder.Entity("InitialMigration.Entities.Instructor", b =>
-                {
-                    b.Navigation("Sections");
                 });
 
             modelBuilder.Entity("InitialMigration.Entities.Office", b =>

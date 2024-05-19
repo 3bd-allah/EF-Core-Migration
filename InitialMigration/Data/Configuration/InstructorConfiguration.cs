@@ -27,6 +27,11 @@ namespace InitialMigration.Data.Configuration
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(50);
 
+            builder.HasOne(x => x.Office)
+                   .WithOne(x => x.Instructor)
+                   .HasForeignKey<Instructor>(x => x.OfficeId)
+                   .IsRequired(false);
+
             builder.ToTable("Instructors");
 
 
@@ -44,11 +49,11 @@ namespace InitialMigration.Data.Configuration
 
             return new List<Instructor>
             {
-                new Instructor {Id = 1 , FName = "Ahmed", LName= "Abdullah"},
-                new Instructor {Id = 2 , FName = "Yasmeen", LName= "Mohammed"},
-                new Instructor {Id = 3 , FName = "Khalid", LName= "Hassan"},
-                new Instructor {Id = 4 , FName = "Nadia", LName= "Ali"},
-                new Instructor {Id = 5 , FName = "Omar", LName= "Ibrahim"},
+                new Instructor {Id = 1 , FName = "Ahmed", LName= "Abdullah", OfficeId=1},
+                new Instructor {Id = 2 , FName = "Yasmeen", LName= "Mohammed" , OfficeId=2},
+                new Instructor {Id = 3 , FName = "Khalid", LName= "Hassan", OfficeId = 3},
+                new Instructor {Id = 4 , FName = "Nadia", LName= "Ali", OfficeId = 4},
+                new Instructor {Id = 5 , FName = "Omar", LName= "Ibrahim", OfficeId = 5},
             };
 
 

@@ -11,6 +11,9 @@ namespace InitialMigration.Data
 
         DbSet<Course> Courses { get; set; }
         DbSet<Instructor> Instructors { get; set; }
+        DbSet<Office> Offices { get; set; }
+        DbSet<Section> Sections { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
