@@ -35,6 +35,10 @@ namespace InitialMigration.Data.Configuration
                    .WithMany(e => e.Sections)
                    .UsingEntity<SectionSchedule>();
 
+            builder.HasMany(e => e.Students)
+                   .WithMany(e => e.Sections)
+                   .UsingEntity<Enrollment>();
+
             builder.ToTable("Sections");
 
             builder.HasData(LoadSections());

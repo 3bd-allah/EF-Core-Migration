@@ -20,5 +20,7 @@ namespace InitialMigration.Entities
         public ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
         public ICollection<SectionSchedule> SectionShedules { get; set; } = new List<SectionSchedule>();
 
+        public ICollection<Student> Students { get; set; } = new List<Student>();
+
     }
 }

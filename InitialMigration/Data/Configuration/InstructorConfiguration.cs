@@ -21,7 +21,7 @@ namespace InitialMigration.Data.Configuration
                 .IsRequired()
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(50);
-            
+
             builder.Property(x => x.LName)
                 .IsRequired()
                 .HasColumnType("VARCHAR")
@@ -59,4 +59,5 @@ namespace InitialMigration.Data.Configuration
 
         }
     }
+
 }
