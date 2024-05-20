@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialMigration.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240520114403_add-many-to-many-section-schedule")]
+    [Migration("20240520114815_add-many-to-many-section-schedule")]
     partial class addmanytomanysectionschedule
     {
         /// <inheritdoc />
@@ -200,6 +200,104 @@ namespace InitialMigration.Migrations
                         });
                 });
 
+            modelBuilder.Entity("InitialMigration.Entities.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("FRI")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("MON")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("SAT")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("SUN")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("THU")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("TUE")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<bool>("WED")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Schedules", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FRI = false,
+                            MON = true,
+                            SAT = false,
+                            SUN = true,
+                            THU = true,
+                            TUE = true,
+                            Title = "Daily",
+                            WED = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FRI = false,
+                            MON = false,
+                            SAT = false,
+                            SUN = true,
+                            THU = true,
+                            TUE = true,
+                            Title = "DayAfterDay",
+                            WED = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FRI = false,
+                            MON = true,
+                            SAT = false,
+                            SUN = false,
+                            THU = false,
+                            TUE = false,
+                            Title = "Twice-a-Week",
+                            WED = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FRI = true,
+                            MON = false,
+                            SAT = true,
+                            SUN = false,
+                            THU = false,
+                            TUE = false,
+                            Title = "Weekend",
+                            WED = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FRI = true,
+                            MON = true,
+                            SAT = true,
+                            SUN = true,
+                            THU = true,
+                            TUE = true,
+                            Title = "Compact",
+                            WED = true
+                        });
+                });
+
             modelBuilder.Entity("InitialMigration.Entities.Section", b =>
                 {
                     b.Property<int>("Id")
@@ -304,6 +402,122 @@ namespace InitialMigration.Migrations
                         });
                 });
 
+            modelBuilder.Entity("InitialMigration.Entities.SectionSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SectionId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.HasIndex("SectionId");
+
+                    b.ToTable("SectionSchedules", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EndTime = new TimeSpan(0, 10, 0, 0, 0),
+                            ScheduleId = 1,
+                            SectionId = 1,
+                            StartTime = new TimeSpan(0, 8, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EndTime = new TimeSpan(0, 18, 0, 0, 0),
+                            ScheduleId = 3,
+                            SectionId = 2,
+                            StartTime = new TimeSpan(0, 14, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EndTime = new TimeSpan(0, 15, 0, 0, 0),
+                            ScheduleId = 4,
+                            SectionId = 3,
+                            StartTime = new TimeSpan(0, 10, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EndTime = new TimeSpan(0, 12, 0, 0, 0),
+                            ScheduleId = 1,
+                            SectionId = 4,
+                            StartTime = new TimeSpan(0, 10, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EndTime = new TimeSpan(0, 18, 0, 0, 0),
+                            ScheduleId = 1,
+                            SectionId = 5,
+                            StartTime = new TimeSpan(0, 16, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EndTime = new TimeSpan(0, 10, 0, 0, 0),
+                            ScheduleId = 2,
+                            SectionId = 6,
+                            StartTime = new TimeSpan(0, 8, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            EndTime = new TimeSpan(0, 14, 0, 0, 0),
+                            ScheduleId = 3,
+                            SectionId = 7,
+                            StartTime = new TimeSpan(0, 11, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            EndTime = new TimeSpan(0, 14, 0, 0, 0),
+                            ScheduleId = 4,
+                            SectionId = 8,
+                            StartTime = new TimeSpan(0, 10, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            EndTime = new TimeSpan(0, 18, 0, 0, 0),
+                            ScheduleId = 4,
+                            SectionId = 9,
+                            StartTime = new TimeSpan(0, 16, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            EndTime = new TimeSpan(0, 15, 0, 0, 0),
+                            ScheduleId = 3,
+                            SectionId = 10,
+                            StartTime = new TimeSpan(0, 12, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            EndTime = new TimeSpan(0, 11, 0, 0, 0),
+                            ScheduleId = 5,
+                            SectionId = 11,
+                            StartTime = new TimeSpan(0, 9, 0, 0, 0)
+                        });
+                });
+
             modelBuilder.Entity("InitialMigration.Entities.Instructor", b =>
                 {
                     b.HasOne("InitialMigration.Entities.Office", "Office")
@@ -330,6 +544,21 @@ namespace InitialMigration.Migrations
                     b.Navigation("Instructor");
                 });
 
+            modelBuilder.Entity("InitialMigration.Entities.SectionSchedule", b =>
+                {
+                    b.HasOne("InitialMigration.Entities.Schedule", null)
+                        .WithMany("SectionShedules")
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InitialMigration.Entities.Section", null)
+                        .WithMany("SectionShedules")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("InitialMigration.Entities.Course", b =>
                 {
                     b.Navigation("Sections");
@@ -343,6 +572,16 @@ namespace InitialMigration.Migrations
             modelBuilder.Entity("InitialMigration.Entities.Office", b =>
                 {
                     b.Navigation("Instructor");
+                });
+
+            modelBuilder.Entity("InitialMigration.Entities.Schedule", b =>
+                {
+                    b.Navigation("SectionShedules");
+                });
+
+            modelBuilder.Entity("InitialMigration.Entities.Section", b =>
+                {
+                    b.Navigation("SectionShedules");
                 });
 #pragma warning restore 612, 618
         }

@@ -33,7 +33,7 @@ namespace InitialMigration.Data.Configuration
 
             builder.HasMany(e => e.Schedules)
                    .WithMany(e => e.Sections)
-                   .UsingEntity<SectionShedule>();
+                   .UsingEntity<SectionSchedule>();
 
             builder.ToTable("Sections");
 
