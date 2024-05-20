@@ -31,6 +31,10 @@ namespace InitialMigration.Data.Configuration
                    .HasForeignKey(x =>x.InstructorId)
                    .IsRequired(false);
 
+            builder.HasMany(e => e.Schedules)
+                   .WithMany(e => e.Sections)
+                   .UsingEntity<SectionShedule>();
+
             builder.ToTable("Sections");
 
             builder.HasData(LoadSections());
