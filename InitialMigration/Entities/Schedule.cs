@@ -16,11 +16,11 @@ namespace InitialMigration.Entities
         public bool MON { get; set; }
         public bool TUE { get; set; }
         public bool WED { get; set; }
-        public bool THR { get; set; }
+        public bool THU { get; set; }
         public bool FRI { get; set; }
 
         public ICollection<Section> Sections { get; set; } = new List<Section>();
-        public ICollection<SectionShedule> SectionShedules { get; set; } = new List<SectionShedule>();  
+        public ICollection<SectionSchedule> SectionShedules { get; set; } = new List<SectionSchedule>();  
 
 
     }

@@ -18,7 +18,7 @@ namespace InitialMigration.Entities
         public Instructor? Instructor { get; set; } = null!;
 
         public ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
-        public ICollection<SectionShedule> SectionShedules { get; set; } = new List<SectionShedule>();
+        public ICollection<SectionSchedule> SectionShedules { get; set; } = new List<SectionSchedule>();
 
     }
 }
